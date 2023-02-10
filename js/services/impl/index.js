@@ -22,9 +22,10 @@ export const generateCardImpl = async ({ customerId, email, tokenId, deviceId, p
   return service.createCard(parameters3DS ? { ...data, authentication_3DS: { ...parameters3DS } } : data);
 }
 
-export const generateChargeImpl = async ({tokenId,  email, parameters3DS = null}) => {
+export const generateChargeImpl = async ({tokenId, deviceId,  email, parameters3DS = null}) => {
   var data_fraud = {
-   phone_number: "961778965"
+   phone_number: "961778965",
+   device_finger_print_id: deviceId
 }
   var data = {
     amount : config.TOTAL_AMOUNT,
