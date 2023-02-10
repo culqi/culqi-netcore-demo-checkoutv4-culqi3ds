@@ -19,7 +19,7 @@ window.addEventListener("message", async function (event) {
     if (parameters3DS) {
         let statusCode = null;
         const email = Culqi.token.email;
-        const responseCharge = await generateChargeImpl({ tokenId, email, parameters3DS });
+        const responseCharge = await generateChargeImpl({ tokenId, deviceId, email, parameters3DS });
         statusCode = responseCharge.statusCode;     
 
       if (statusCode === 200) {
