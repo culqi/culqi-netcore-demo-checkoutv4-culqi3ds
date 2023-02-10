@@ -23,11 +23,11 @@ window.addEventListener("message", async function (event) {
         statusCode = responseCharge.statusCode;     
 
       if (statusCode === 200) {
-        resultdivCard("TARJETA CREADA CON ÉXITO");
+        resultdivCard("CARGO CREADA CON ÉXITO");
         Culqi3DS.reset();
 
       } else {
-        resultdivCard("CREACIÓN DE TARJETA FALLIDA");
+        resultdivCard("CREACIÓN DE CARGO FALLIDA");
         Culqi3DS.reset();
       }
     }
