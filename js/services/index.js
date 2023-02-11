@@ -10,20 +10,36 @@ class Service {
       directoryServerTransactionId: body.authentication_3DS.directoryServerTransactionId,
     } : null;
     try {
-      const response = await fetch(`${this.#BASE_URL}/${endPoint}`,
-        {
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded', ...headers },
-          body: new URLSearchParams({
-            amount: body.amount,
-            currency_code: body.currency_code,
-            email: body.email,
-            token: body.source_id,
-            customer_id: body.customer_id,
-            deviceId: body.antifraud_details.device_finger_print_id,
-            ...authentication_3DS,
-          }),
-          method
-        });
+          var body_raw = null;
+          if (endPoint === "api/Card") {
+
+              body_raw = new URLSearchParams({
+                  amount: body.amount,
+                  currency_code: body.currency_code,
+                  email: body.email,
+                  token: body.source_id,
+                  customer_id: body.customer_id,
+                  deviceId: body.antifraud_details.device_finger_print_id,
+                  ...authentication_3DS,
+              });
+          }
+          else {
+              body_raw = new URLSearchParams({
+                  amount: body.amount,
+                  currency_code: body.currency_code,
+                  email: body.email,
+                  token: body.source_id,                 
+                  deviceId: body.antifraud_details.device_finger_print_id,
+                  ...authentication_3DS,
+              });
+          }
+          const response = await fetch(`${this.#BASE_URL}/${endPoint}`,
+              {
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded', ...headers },
+                  body: body_raw,
+                  method
+              });
+     
       const responseJSON = await response;
       return { statusCode: response.status, data: responseJSON }
     } catch (err) {
