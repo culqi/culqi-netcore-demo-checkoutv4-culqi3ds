@@ -47,7 +47,7 @@ window.culqi = async () => {
     tokenId = Culqi.token.id;
     console.log(Culqi.token.email);
     const email = Culqi.token.email;
-    const { statusCode } = await generateChargeImpl({tokenId, email });
+    const { statusCode } = await generateChargeImpl({tokenId, deviceId, email });
     validationInit3DS({ statusCode, email, tokenId });
 
   } else {
