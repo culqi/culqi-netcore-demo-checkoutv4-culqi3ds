@@ -13,7 +13,7 @@ namespace Demo.Controllers
 {
    
     [Route("api/[controller]")]
-    public class CustomerController : Controller
+    public class CustomerController : GenericController
     {
         Security security = null;
         // GET: api/values
@@ -42,9 +42,9 @@ namespace Demo.Controllers
             string first_name = json.GetProperty("first_name").GetString();
             string last_name = json.GetProperty("last_name").GetString();
             string phone_number = json.GetProperty("phone_number").GetString();
-            security = new Security();
-            security.public_key = "INSERTE_SU_LLAVE_PUBLICA";
-            security.secret_key = "INSERTE_SU_LLAVE_PRIVADA";
+     
+            security = securityKeys();
+
             Dictionary<string, object> map = new Dictionary<string, object>
             {
                 {"address", address},

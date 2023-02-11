@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 namespace Demo.Controllers
 {
     [Route("api/[controller]")]
-    public class ChargeController : Controller
+    public class ChargeController : GenericController
     {
         Security security = null;
         // GET: api/values
@@ -34,9 +34,7 @@ namespace Demo.Controllers
         [Consumes("application/x-www-form-urlencoded")]
         public String Post([FromForm] IFormCollection form)
         {
-            security = new Security();
-            security.public_key = "INSERTE_SU_LLAVE_PUBLICA";
-            security.secret_key = "INSERTE_SU_LLAVE_PRIVADA";
+            security = securityKeys();
 
             string amount = form["amount"].FirstOrDefault();
             string currency_code = form["currency_code"].FirstOrDefault();
