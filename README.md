@@ -18,7 +18,7 @@ La demo integra Culqi Net/NetCore, Checkout V4 , Culqi 3DS y es compatible con l
 
 ## Configuración
 
-Dentro del archivo **card.cs** coloca tus llaves pk y sk.
+Dentro del archivo **GenericController.cs** coloca tus llaves pk y sk.
 
 ## Inicializar la demo
 
