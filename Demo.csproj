@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-    <PackageReference Include="RestSharp" Version="108.0.3" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,8 +22,8 @@
     <Folder Include="vista\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="culqinet">
-      <HintPath>..\netstandard2.1\culqinet.dll</HintPath>
+    <Reference Include="CulqiNet">
+      <HintPath>..\..\..\Downloads\CulqiNet.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

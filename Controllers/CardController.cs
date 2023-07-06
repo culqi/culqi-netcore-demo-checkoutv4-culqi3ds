@@ -32,7 +32,7 @@ namespace Demo.Controllers
         // POST api/values
         [HttpPost]
         [Consumes("application/x-www-form-urlencoded")]
-        public String Post([FromForm] IFormCollection form)
+        public ResponseCulqi Post([FromForm] IFormCollection form)
         {
             string customer_id = form["customer_id"].FirstOrDefault();
             string token_id = form["token"].FirstOrDefault();
@@ -53,8 +53,8 @@ namespace Demo.Controllers
                      {"token_id", token_id}
                 };
 
-                var json_object = JObject.Parse(new Card(security).Create(map));
-                return json_object.ToString();
+                ResponseCulqi json_object = new Card(security).Create(map);
+                return json_object;
             }
             else
             {
@@ -72,8 +72,8 @@ namespace Demo.Controllers
                     {"token_id", token_id},
                     {"authentication_3DS", authentication_3DS},
                 };
-                var json_object = JObject.Parse(new Card(security).Create(map));
-                return json_object.ToString();
+                ResponseCulqi json_object = new Card(security).Create(map);
+                return json_object;
             }
         }
 

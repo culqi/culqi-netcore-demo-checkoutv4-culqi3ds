@@ -32,7 +32,7 @@ namespace Demo.Controllers
 
         // POST api/values
         [HttpPost]
-        public String Post([FromBody] JsonElement json)
+        public ResponseCulqi Post([FromBody] JsonElement json)
         {
            
             string address = json.GetProperty("address").GetString();
@@ -56,8 +56,8 @@ namespace Demo.Controllers
                 {"phone_number", Convert.ToInt32(phone_number)}
             };
 
-            var json_object = JObject.Parse(new Customer(security).Create(map));
-            return json_object.ToString();
+            ResponseCulqi json_object = new Customer(security).Create(map);
+            return json_object;
         }
 
         // PUT api/values/5

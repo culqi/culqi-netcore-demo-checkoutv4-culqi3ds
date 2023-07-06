@@ -32,7 +32,7 @@ namespace Demo.Controllers
         // POST api/values
         [HttpPost]
         [Consumes("application/x-www-form-urlencoded")]
-        public String Post([FromForm] IFormCollection form)
+        public ResponseCulqi Post([FromForm] IFormCollection form)
         {
             security = securityKeys();
 
@@ -58,8 +58,8 @@ namespace Demo.Controllers
                     {"source_id", source_id}
                 };
 
-                var json_object = JObject.Parse(new Charge(security).Create(map));
-                return json_object.ToString();
+                ResponseCulqi json_object = new Charge(security).Create(map);
+                return json_object;
             }
             else
             {
@@ -80,8 +80,8 @@ namespace Demo.Controllers
                     {"source_id", source_id},
                     {"authentication_3DS", authentication_3DS},
                 };
-                var json_object = JObject.Parse(new Charge(security).Create(map));
-                return json_object.ToString();
+                ResponseCulqi json_object = new Charge(security).Create(map);
+                return json_object;
             }
            
 
