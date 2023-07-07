@@ -1,27 +1,27 @@
 ﻿<Properties StartupConfiguration="{EE6BE397-0C11-400C-A63D-757540106085}|Default">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/CardController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/ChargeController.cs">
     <Files>
       <File FileName="js/helpers/index.js" />
       <File FileName="../../../../../usr/local/share/dotnet/sdk/7.0.203/Microsoft.Common.CurrentVersion.targets" />
-      <File FileName="Controllers/CustomerController.cs" Line="38" Column="1" />
-      <File FileName="Controllers/ChargeController.cs" Line="83" Column="30" />
-      <File FileName="Controllers/CardController.cs" Line="56" Column="30" />
-      <File FileName="vista/index.html" Line="1" Column="1" />
+      <File FileName="Controllers/CustomerController.cs" />
+      <File FileName="Controllers/ChargeController.cs" Line="1" Column="1" />
+      <File FileName="Controllers/CardController.cs" />
+      <File FileName="vista/index.html" />
       <File FileName="js/config/index.js" />
       <File FileName="Controllers/GenericController.cs" />
       <File FileName="js/config/checkout.js" />
       <File FileName="appsettings.json" />
-      <File FileName="Program.cs" />
+      <File FileName="Program.cs" Line="43" Column="1" />
       <File FileName="README.md" />
       <File FileName="js/helpers/selectors.js" />
-      <File FileName="js/services/impl/index.js" Line="1" Column="1" />
+      <File FileName="js/services/impl/index.js" />
       <File FileName="js/config/culqi3ds.js" />
-      <File FileName="js/main.js" Line="149" Column="6" />
+      <File FileName="js/main.js" />
       <File FileName="Properties/launchSettings.json" />
-      <File FileName="../culqi-net/culqi.net/culqinet/util/RequestCulqi.cs" Line="20" Column="1" />
-      <File FileName="js/services/index.js" Line="1" Column="1" />
-      <File FileName="vista/index-card.html" Line="80" Column="62" />
+      <File FileName="../culqi-net/culqi.net/culqinet/util/RequestCulqi.cs" />
+      <File FileName="js/services/index.js" />
+      <File FileName="vista/index-card.html" />
+      <File FileName="Controllers/OrderController.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -32,7 +32,7 @@
                 <Node name="PackageDependencies" expanded="True" />
               </Node>
               <Node name="Controllers" expanded="True">
-                <Node name="CardController.cs" selected="True" />
+                <Node name="ChargeController.cs" selected="True" />
               </Node>
               <Node name="js" expanded="True">
                 <Node name="config" expanded="True" />
@@ -49,14 +49,11 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Demo PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/admin/Documents/Culqi/culqi-netcore-demo-checkoutv4-culqi3ds/Controllers/ChargeController.cs" relfile="Controllers/ChargeController.cs" line="39" column="1" />
-      <Breakpoint file="/Users/admin/Documents/Culqi/culqi-netcore-demo-checkoutv4-culqi3ds/Controllers/ChargeController.cs" relfile="Controllers/ChargeController.cs" line="83" column="1" />
-      <Breakpoint file="/Users/admin/Documents/Culqi/culqi-netcore-demo-checkoutv4-culqi3ds/Controllers/CardController.cs" relfile="Controllers/CardController.cs" line="37" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Demo PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
 </Properties>

@@ -16,9 +16,11 @@ let jsonParams = {
 
 async function generarOrder(){
   const { statusCode, data } = await generateOrderImpl();
-  if (statusCode === 201) {
+  if (data.statusCode === 201) {
     console.log("Order",data);
-    return data.id;
+    var objeto = JSON.parse(data.body);
+
+    return objeto.id;
   } else {
     console.log('No se pudo obtener la orden');
   }
@@ -38,10 +40,10 @@ let tokenId,
   customerId = null;
 window.addEventListener(
   "message",
-  async function (event) {
+  async function (event) {   
     if (event.origin === window.location.origin) {
       const { parameters3DS, error } = event.data;
-
+      console.log("Llego addEventListener");
       if (parameters3DS) {
         let statusCode = null;
         let objResponse = null;
@@ -52,8 +54,10 @@ window.addEventListener(
             tokenId,
             parameters3DS,
           }); //2da llamada a cargo
-          objResponse = responseCharge.data.object;
-          statusCode = responseCharge.statusCode;
+          var objeto = JSON.parse(responseCharge.data.body);
+          objResponse = objeto.object;
+          statusCode = responseCharge.data.statusCode;          
+          console.log(statusCode);
         } else {
           const responseCard = await createCardImpl({
             customerId,
@@ -61,8 +65,9 @@ window.addEventListener(
             deviceId,
             parameters3DS,
           }); //2da llamada a creacion de CARD, validacion de 1 sol
-          objResponse = responseCard.data.object;
-          statusCode = responseCard.statusCode;
+          var objeto = JSON.parse(responseCard.data.body);
+          objResponse = objeto.object;
+          statusCode = responseCard.data.statusCode;
         }
 
         if (statusCode === 201) {
@@ -103,16 +108,21 @@ window.culqi = async () => {
         email,
         tokenId,
       }); //1ra llamada a cargo
-      objResponse = responseCharge.data;
-      statusCode = responseCharge.statusCode;
+     
+      console.log(responseCharge.data.body)
+      objResponse = responseCharge.data.body;
+      statusCode = responseCharge.data.statusCode;
+      console.log(statusCode);
     } else {
       customerId = selectors.customerCustomFormElement.value;
       const responseCard = await createCardImpl({ customerId, tokenId, deviceId }); // 1ra llamada a creacion de CARDS
- 	  objResponse = responseCard.data;
-      statusCode = responseCard.statusCode;
+      console.log(responseCard.data.body)
+      objResponse = responseCard.data.body;
+      statusCode = responseCard.data.statusCode;
     }
     if (statusCode === 200) {
-		if(objResponse.action_code === "REVIEW"){
+    var objeto = JSON.parse(objResponse);
+		if(objeto.action_code === "REVIEW"){
 			validationInit3DS({ email, statusCode, tokenId });
 		}else{
 			$("#response_card").text("ERROR AL REALIZAR LA OPERACIÓN");

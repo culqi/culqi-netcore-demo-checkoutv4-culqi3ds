@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using culqi.net;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
-
+using System.Text.Json;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Demo.Controllers
@@ -31,21 +31,20 @@ namespace Demo.Controllers
 
         // POST api/values
         [HttpPost]
-        [Consumes("application/x-www-form-urlencoded")]
-        public ResponseCulqi Post([FromForm] IFormCollection form)
+        //[Consumes("application/x-www-form-urlencoded")]
+        public ResponseCulqi Post([FromBody] JsonElement json)
         {
-            string customer_id = form["customer_id"].FirstOrDefault();
-            string token_id = form["token"].FirstOrDefault();
+            string customer_id = json.GetProperty("customer_id").GetString();
+            string token_id = json.GetProperty("token_id").GetString();
+            //string customer_id = form["customer_id"].FirstOrDefault();
+            //string token_id = form["token"].FirstOrDefault();
             security = securityKeys();
-
-
-            string eci = form["eci"].FirstOrDefault();
-            string xid = form["xid"].FirstOrDefault();
-            string cavv = form["cavv"].FirstOrDefault();
-            string protocolVersion = form["protocolVersion"].FirstOrDefault();
-            string directoryServerTransactionId = form["directoryServerTransactionId"].FirstOrDefault();
-
-            if (eci == null)
+            //string eci = form["eci"].FirstOrDefault();
+            //string xid = form["xid"].FirstOrDefault();
+            //string cavv = form["cavv"].FirstOrDefault();
+            //string protocolVersion = form["protocolVersion"].FirstOrDefault();
+            //string directoryServerTransactionId = form["directoryServerTransactionId"].FirstOrDefault();
+            if (!json.TryGetProperty("eci", out JsonElement eciProperty))
             {
                 Dictionary<string, object> map = new Dictionary<string, object>
                 {
@@ -58,6 +57,11 @@ namespace Demo.Controllers
             }
             else
             {
+                string eci = json.GetProperty("eci").GetString();
+                string xid = json.GetProperty("xid").GetString();
+                string cavv = json.GetProperty("cavv").GetString();
+                string protocolVersion = json.GetProperty("protocolVersion").GetString();
+                string directoryServerTransactionId = json.GetProperty("directoryServerTransactionId").GetString();
                 Dictionary<string, object> authentication_3DS = new Dictionary<string, object>
                 {
                     {"eci", eci},
