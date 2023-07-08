@@ -44,10 +44,15 @@ namespace Demo.Controllers
             string currency_code = json.GetProperty("currency_code").GetString();          
             string email = json.GetProperty("email").GetString();
             string source_id = json.GetProperty("source_id").GetString();
-          
-            
-          
-            if (!json.TryGetProperty("eci", out JsonElement eciProperty))
+            string propertyName = "authentication_3DS"; // Nombre de la propiedad a validar
+
+            JObject jsonObject = JObject.Parse(json.GetRawText());
+            bool propertyExists = jsonObject.ContainsKey(propertyName);
+
+
+
+
+            if (!propertyExists)
             {
                
 
@@ -72,11 +77,44 @@ namespace Demo.Controllers
             }
             else
             {
-                string eci = json.GetProperty("eci").GetString();
-                string xid = json.GetProperty("xid").GetString();
-                string cavv = json.GetProperty("cavv").GetString();
-                string protocolVersion = json.GetProperty("protocolVersion").GetString();
-                string directoryServerTransactionId = json.GetProperty("directoryServerTransactionId").GetString();
+                string eci = "";
+                string xid = "";
+                string cavv = "";
+                string protocolVersion = "";
+                string directoryServerTransactionId = "";
+                if (json.ValueKind == JsonValueKind.Object)
+                {
+                    if (json.TryGetProperty("authentication_3DS", out JsonElement authentication3DSProperty) && authentication3DSProperty.ValueKind == JsonValueKind.Object)
+                    {
+                        if (authentication3DSProperty.TryGetProperty("eci", out JsonElement eciProperty) && eciProperty.ValueKind == JsonValueKind.String)
+                        {
+                            eci = eciProperty.GetString();
+                            Console.WriteLine("El valor de 'eci' es: " + eci);
+                        }
+
+                        if (authentication3DSProperty.TryGetProperty("xid", out JsonElement xidProperty) && xidProperty.ValueKind == JsonValueKind.String)
+                        {
+                            xid = xidProperty.GetString();
+                            Console.WriteLine("El valor de 'xid' es: " + xid);
+                        }
+                        if (authentication3DSProperty.TryGetProperty("cavv", out JsonElement cavvProperty) && cavvProperty.ValueKind == JsonValueKind.String)
+                        {
+                            cavv = cavvProperty.GetString();
+                            Console.WriteLine("El valor de 'xid' es: " + cavv);
+                        }
+                        if (authentication3DSProperty.TryGetProperty("protocolVersion", out JsonElement protocolVersionProperty) && protocolVersionProperty.ValueKind == JsonValueKind.String)
+                        {
+                            protocolVersion = protocolVersionProperty.GetString();
+                            Console.WriteLine("El valor de 'xid' es: " + protocolVersion);
+                        }
+                        if (authentication3DSProperty.TryGetProperty("directoryServerTransactionId", out JsonElement directoryServerTransactionIdProperty) && directoryServerTransactionIdProperty.ValueKind == JsonValueKind.String)
+                        {
+                            directoryServerTransactionId = directoryServerTransactionIdProperty.GetString();
+                            Console.WriteLine("El valor de 'xid' es: " + directoryServerTransactionId);
+                        }
+                    }
+                }
+             
                 Dictionary<string, object> authentication_3DS = new Dictionary<string, object>
                 {
                     {"eci", eci},
