@@ -22,7 +22,9 @@ namespace Demo.Controllers
             security = new Security();
             security.public_key = "INSERTE_SU_LLAVE_PUBLICA";
             security.secret_key = "INSERTE_SU_LLAVE_PRIVADA";
-
+            security.rsa_id = "INSERTE_SU_RSA_ID";
+            security.rsa_key = "INSERTE_SU_LLAVE_RSA";
+        
             return security;
         }
 

@@ -1,45 +1,60 @@
-class Service {
-  #BASE_URL = "https://localhost:7165";
+import config  from "../config/index.js"
 
-  #http = async ({ endPoint, method = 'POST', body = {}, headers = {} }) => {
-    const authentication_3DS = body.authentication_3DS ? {
-      eci: body.authentication_3DS.eci,
-      xid: body.authentication_3DS.xid,
-      cavv: body.authentication_3DS.cavv,
-      protocolVersion: body.authentication_3DS.protocolVersion,
-      directoryServerTransactionId: body.authentication_3DS.directoryServerTransactionId,
-    } : null;
+class Service {
+  #BASE_URL = config.URL_BASE+"/api";
+
+  #http = async ({ endPoint, method = "POST", body = {}, headers = {} }) => {
     try {
-      const response = await fetch(`${this.#BASE_URL}/${endPoint}`,
-        {
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded', ...headers },
-          body: new URLSearchParams({
-            amount: body.amount,
-            currency_code: body.currency_code,
-            email: body.email,
-            token: body.source_id,
-            customer_id: body.customer_id,
-            deviceId: body.antifraud_details.device_finger_print_id,
-            ...authentication_3DS,
-          }),
-          method
-        });
-      const responseJSON = await response;
-      return { statusCode: response.status, data: responseJSON }
+      const response = await fetch(`${this.#BASE_URL}/${endPoint}`, {
+        headers: { "Content-Type": "application/json", ...headers },
+        body: JSON.stringify(body),
+        method,
+      });
+      const responseJSON = await response.json();
+      return { statusCode: response.status, data: responseJSON };
     } catch (err) {
-      return { statusCode: 502, data: null }
+      return { statusCode: 502, data: err };
+    }
+  };
+  
+  #http2 = async ({ endPoint, method = "POST", body = {}, headers = {} }) => {
+  console.log("AQUIIIIII IMPORTANTE");
+  console.log(this.#BASE_URL); 
+  console.log(endPoint); 
+	let statusCode = 502; 
+	try {
+	    const response = await $.ajax({
+	      type: 'POST',
+	      url: `${this.#BASE_URL}/${endPoint}`,
+	      headers: { "Content-Type": "application/json", ...headers },
+	      data: JSON.stringify(body),
+	      success: function (data, status, xhr) {
+	        statusCode = xhr.status;
+	        //response = data;
+	      }
+	    });
+	    const responseJSON = await response;console.log('statusCode',statusCode);
+	    return { statusCode: statusCode, data: responseJSON }
+    } catch (err) {
+      return { statusCode: statusCode, data: null }
     }
   }
 
+  createOrder = async (bodyOrder) => {
+    return this.#http2({ endPoint: "Order", body: bodyOrder });
+  }
+  
+  generateCharge = async (bodyCharges) => {
+    return this.#http2({ endPoint: "Charge", body: bodyCharges });
+  };
+
+  createCustomer = async (bodyCustomers) => {
+    return this.#http({ endPoint: "Customer", body: bodyCustomers });
+  };
+
   createCard = async (bodyCard) => {
-    console.log("Entro createCard");
-    console.log(JSON.stringify(bodyCard));
-    return this.#http({ endPoint: "api/Card", body:bodyCard});
-  }
-  createCharge = async (bodyCharge) => {
-    console.log("Entro createCard");
-    console.log(JSON.stringify(bodyCharge));
-    return this.#http({ endPoint: "api/Charge", body:bodyCharge});
-  }
+    return this.#http2({ endPoint: "Card", body: bodyCard });
+  };
 }
+
 export default Service;
