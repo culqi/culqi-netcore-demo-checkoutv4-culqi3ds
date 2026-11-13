@@ -26,6 +26,26 @@ Si deseas actualizar a la última versión de la líbrería Culqi-Net puedes des
 
 https://github.com/culqi/culqi-net/tags
 
+## Configurar las pruebas y ejemplos
+
+La demo y su historial usan placeholders en lugar de credenciales:
+
+| Placeholder | Configuración |
+| --- | --- |
+| `INSERTE_SU_LLAVE_PUBLICA` | Llave pública propia de prueba (`pk_test_`). |
+| `INSERTE_SU_LLAVE_PRIVADA` | Llave privada propia de prueba (`sk_test_`), únicamente en el backend. |
+| `INSERTE_SU_RSA_ID` | Identificador RSA de tu comercio. |
+| `INSERTE_SU_LLAVE_RSA` | Llave pública RSA para cifrar las solicitudes. |
+
+Reemplázalos solo en tu copia local: configura el backend en
+`Controllers/GenericController.cs` y el frontend en `js/config/index.js`.
+Usa las llaves de prueba y la configuración RSA de tu propio comercio.
+Nunca coloques la llave privada en JavaScript, HTML ni otro contenido público,
+y no hagas commit de credenciales.
+
+Las operaciones de la demo realizan llamadas reales a Culqi; los placeholders
+no permiten ejecutarlas. Usa únicamente datos y llaves de prueba.
+
 ## Configuración backend
 
 Dentro del archivo **GenericController.cs** coloca tus llaves pk y sk.
@@ -35,10 +55,10 @@ public Security securityKeys()
     {
         
         security = new Security();
-        security.public_key = "Llave pública del comercio (INSERTE_SU_LLAVE_PUBLICA)";
-        security.secret_key = "Llave secreta del comercio (INSERTE_SU_LLAVE_PRIVADA)";
-        security.rsa_id = "Id de la llave RSA";
-        security.rsa_key = "Llave pública RSA que sirve para encriptar el payload de los servicios";
+        security.public_key = "INSERTE_SU_LLAVE_PUBLICA";
+        security.secret_key = "INSERTE_SU_LLAVE_PRIVADA";
+        security.rsa_id = "INSERTE_SU_RSA_ID";
+        security.rsa_key = "INSERTE_SU_LLAVE_RSA";
     
         return security;
     }
@@ -52,9 +72,9 @@ Para configurar los datos del cargo, pk del comercio, rsa_id, rsa_public_key y d
 export default Object.freeze({
     TOTAL_AMOUNT: monto de pago,
     CURRENCY: tipo de moneda,
-    PUBLIC_KEY: llave publica del comercio (INSERTE_SU_LLAVE_PUBLICA),
-    RSA_ID: Id de la llave RSA,
-    RSA_PUBLIC_KEY: Llave pública RSA que sirve para encriptar el payload de los servicios del checkout,
+    PUBLIC_KEY: "INSERTE_SU_LLAVE_PUBLICA",
+    RSA_ID: "INSERTE_SU_RSA_ID",
+    RSA_PUBLIC_KEY: "INSERTE_SU_LLAVE_RSA",
     COUNTRY_CODE: iso code del país(Ejemplo PE)
 });
 
